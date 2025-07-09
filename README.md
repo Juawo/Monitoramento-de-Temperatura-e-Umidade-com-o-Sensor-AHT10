@@ -1,0 +1,1 @@
+# Monitoramento-de-Temperatura-e-Umidade-com-o-Sensor-AHT10
