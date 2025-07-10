@@ -35,7 +35,11 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(read-temp-humi read-temp-humi.c )
+add_executable(read-temp-humi 
+    read-temp-humi.c 
+    src/buzzer.c
+    src/temp_humi_sensor.c
+    )
 
 pico_set_program_name(read-temp-humi "read-temp-humi")
 pico_set_program_version(read-temp-humi "0.1")
@@ -46,17 +50,20 @@ pico_enable_stdio_usb(read-temp-humi 1)
 
 # Add the standard library to the build
 target_link_libraries(read-temp-humi
-        pico_stdlib)
+        pico_stdlib
+        hardware_i2c
+        hardware_pwm
+    )
 
 # Add the standard include files to the build
 target_include_directories(read-temp-humi PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR},
+        ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
 # Add any user requested libraries
 target_link_libraries(read-temp-humi 
         hardware_i2c
-        
         )
 
 pico_add_extra_outputs(read-temp-humi)
